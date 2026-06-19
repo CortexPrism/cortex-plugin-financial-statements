@@ -1,0 +1,247 @@
+{
+  "name": "cortex-plugin-financial-statements",
+  "version": "1.0.0",
+  "description": "Financial Statement Generator — QuickBooks, Xero, and FreshBooks integration for P&L, balance sheet, cash flow statements, and variance analysis with natural-language querying",
+  "kind": "esm",
+  "entryPoint": "mod.ts",
+  "runtime": "deno",
+  "author": "CortexPrism",
+  "license": "MIT",
+  "repository": "https://github.com/CortexPrism/cortex-plugin-financial-statements",
+  "homepage": "https://cortexprism.io/marketplace/plugins/financial-statements",
+  "capabilities": ["tools", "network:fetch"],
+  "tools": [
+    {
+      "name": "fs_get_profit_loss",
+      "description": "Generate a Profit & Loss (Income Statement) for a given date range with revenue, COGS, expenses, and net income breakdown",
+      "params": [
+        {
+          "name": "platform",
+          "type": "string",
+          "description": "Accounting platform",
+          "required": true,
+          "enum": ["quickbooks", "xero", "freshbooks"]
+        },
+        {
+          "name": "start_date",
+          "type": "string",
+          "description": "Start date (YYYY-MM-DD)",
+          "required": true
+        },
+        {
+          "name": "end_date",
+          "type": "string",
+          "description": "End date (YYYY-MM-DD)",
+          "required": true
+        },
+        {
+          "name": "compare_to",
+          "type": "string",
+          "description": "Compare to: 'previous_period', 'previous_year', or 'budget'",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "fs_get_balance_sheet",
+      "description": "Generate a Balance Sheet as of a specific date with assets, liabilities, and equity",
+      "params": [
+        {
+          "name": "platform",
+          "type": "string",
+          "description": "Accounting platform",
+          "required": true,
+          "enum": ["quickbooks", "xero", "freshbooks"]
+        },
+        {
+          "name": "as_of_date",
+          "type": "string",
+          "description": "As-of date (YYYY-MM-DD)",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "fs_get_cash_flow",
+      "description": "Generate a Cash Flow Statement showing operating, investing, and financing activities",
+      "params": [
+        {
+          "name": "platform",
+          "type": "string",
+          "description": "Accounting platform",
+          "required": true,
+          "enum": ["quickbooks", "xero", "freshbooks"]
+        },
+        {
+          "name": "start_date",
+          "type": "string",
+          "description": "Start date (YYYY-MM-DD)",
+          "required": true
+        },
+        {
+          "name": "end_date",
+          "type": "string",
+          "description": "End date (YYYY-MM-DD)",
+          "required": true
+        },
+        {
+          "name": "method",
+          "type": "string",
+          "description": "Cash flow method",
+          "required": false,
+          "enum": ["direct", "indirect"]
+        }
+      ]
+    },
+    {
+      "name": "fs_get_variance",
+      "description": "Budget vs. Actual variance analysis with percentage differences and anomaly flagging",
+      "params": [
+        {
+          "name": "platform",
+          "type": "string",
+          "description": "Accounting platform",
+          "required": true,
+          "enum": ["quickbooks", "xero", "freshbooks"]
+        },
+        {
+          "name": "period",
+          "type": "string",
+          "description": "Period (e.g. '2026-Q2', '2026-06')",
+          "required": true
+        },
+        {
+          "name": "threshold",
+          "type": "number",
+          "description": "Variance threshold percentage to flag (default: 10)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "fs_list_accounts",
+      "description": "List chart of accounts with balances, types, and categories",
+      "params": [
+        {
+          "name": "platform",
+          "type": "string",
+          "description": "Accounting platform",
+          "required": true,
+          "enum": ["quickbooks", "xero", "freshbooks"]
+        },
+        {
+          "name": "account_type",
+          "type": "string",
+          "description": "Filter by account type",
+          "required": false,
+          "enum": ["asset", "liability", "equity", "revenue", "expense", "all"]
+        },
+        {
+          "name": "search",
+          "type": "string",
+          "description": "Search account name",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "fs_analyze_transactions",
+      "description": "Analyze transactions with categorization, trend detection, and anomaly identification",
+      "params": [
+        {
+          "name": "platform",
+          "type": "string",
+          "description": "Accounting platform",
+          "required": true,
+          "enum": ["quickbooks", "xero", "freshbooks"]
+        },
+        {
+          "name": "start_date",
+          "type": "string",
+          "description": "Start date (YYYY-MM-DD)",
+          "required": true
+        },
+        {
+          "name": "end_date",
+          "type": "string",
+          "description": "End date (YYYY-MM-DD)",
+          "required": true
+        },
+        {
+          "name": "category",
+          "type": "string",
+          "description": "Filter by expense/revenue category",
+          "required": false
+        },
+        {
+          "name": "min_amount",
+          "type": "number",
+          "description": "Minimum transaction amount",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "dependencies": {},
+  "peerDependencies": { "cortex": ">=1.0.0" },
+  "ui": {
+    "settings": [
+      {
+        "section": "QuickBooks",
+        "fields": [
+          {
+            "key": "quickbooksClientId",
+            "label": "QuickBooks Client ID",
+            "type": "text",
+            "defaultValue": ""
+          },
+          {
+            "key": "quickbooksClientSecret",
+            "label": "QuickBooks Client Secret",
+            "type": "secret",
+            "defaultValue": ""
+          },
+          {
+            "key": "quickbooksRealmId",
+            "label": "QuickBooks Realm ID",
+            "type": "text",
+            "defaultValue": ""
+          }
+        ]
+      },
+      {
+        "section": "Xero",
+        "fields": [
+          { "key": "xeroClientId", "label": "Xero Client ID", "type": "text", "defaultValue": "" },
+          {
+            "key": "xeroClientSecret",
+            "label": "Xero Client Secret",
+            "type": "secret",
+            "defaultValue": ""
+          }
+        ]
+      },
+      {
+        "section": "FreshBooks",
+        "fields": [
+          {
+            "key": "freshbooksClientId",
+            "label": "FreshBooks Client ID",
+            "type": "text",
+            "defaultValue": ""
+          },
+          {
+            "key": "freshbooksClientSecret",
+            "label": "FreshBooks Client Secret",
+            "type": "secret",
+            "defaultValue": ""
+          }
+        ]
+      }
+    ]
+  },
+  "aiDisclosure": {
+    "tools": ["Kilo (DeepSeek) — scaffold and implementation"],
+    "humanReview": true
+  }
+}
