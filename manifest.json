@@ -1,7 +1,7 @@
 {
   "name": "cortex-plugin-financial-statements",
-  "version": "1.0.0",
-  "description": "Financial Statement Generator — QuickBooks, Xero, and FreshBooks integration for P&L, balance sheet, cash flow statements, and variance analysis with natural-language querying",
+  "version": "1.0.1",
+  "description": "Financial Statement Generator \u2014 QuickBooks, Xero, and FreshBooks integration for P&L, balance sheet, cash flow statements, and variance analysis with natural-language querying",
   "kind": "esm",
   "entryPoint": "mod.ts",
   "runtime": "deno",
@@ -9,7 +9,10 @@
   "license": "MIT",
   "repository": "https://github.com/CortexPrism/cortex-plugin-financial-statements",
   "homepage": "https://cortexprism.io/marketplace/plugins/financial-statements",
-  "capabilities": ["tools", "network:fetch"],
+  "capabilities": [
+    "tools",
+    "network:fetch"
+  ],
   "tools": [
     {
       "name": "fs_get_profit_loss",
@@ -20,7 +23,11 @@
           "type": "string",
           "description": "Accounting platform",
           "required": true,
-          "enum": ["quickbooks", "xero", "freshbooks"]
+          "enum": [
+            "quickbooks",
+            "xero",
+            "freshbooks"
+          ]
         },
         {
           "name": "start_date",
@@ -51,7 +58,11 @@
           "type": "string",
           "description": "Accounting platform",
           "required": true,
-          "enum": ["quickbooks", "xero", "freshbooks"]
+          "enum": [
+            "quickbooks",
+            "xero",
+            "freshbooks"
+          ]
         },
         {
           "name": "as_of_date",
@@ -70,7 +81,11 @@
           "type": "string",
           "description": "Accounting platform",
           "required": true,
-          "enum": ["quickbooks", "xero", "freshbooks"]
+          "enum": [
+            "quickbooks",
+            "xero",
+            "freshbooks"
+          ]
         },
         {
           "name": "start_date",
@@ -89,7 +104,10 @@
           "type": "string",
           "description": "Cash flow method",
           "required": false,
-          "enum": ["direct", "indirect"]
+          "enum": [
+            "direct",
+            "indirect"
+          ]
         }
       ]
     },
@@ -102,7 +120,11 @@
           "type": "string",
           "description": "Accounting platform",
           "required": true,
-          "enum": ["quickbooks", "xero", "freshbooks"]
+          "enum": [
+            "quickbooks",
+            "xero",
+            "freshbooks"
+          ]
         },
         {
           "name": "period",
@@ -127,14 +149,25 @@
           "type": "string",
           "description": "Accounting platform",
           "required": true,
-          "enum": ["quickbooks", "xero", "freshbooks"]
+          "enum": [
+            "quickbooks",
+            "xero",
+            "freshbooks"
+          ]
         },
         {
           "name": "account_type",
           "type": "string",
           "description": "Filter by account type",
           "required": false,
-          "enum": ["asset", "liability", "equity", "revenue", "expense", "all"]
+          "enum": [
+            "asset",
+            "liability",
+            "equity",
+            "revenue",
+            "expense",
+            "all"
+          ]
         },
         {
           "name": "search",
@@ -153,7 +186,11 @@
           "type": "string",
           "description": "Accounting platform",
           "required": true,
-          "enum": ["quickbooks", "xero", "freshbooks"]
+          "enum": [
+            "quickbooks",
+            "xero",
+            "freshbooks"
+          ]
         },
         {
           "name": "start_date",
@@ -183,7 +220,9 @@
     }
   ],
   "dependencies": {},
-  "peerDependencies": { "cortex": ">=1.0.0" },
+  "peerDependencies": {
+    "cortex": ">=0.51.0"
+  },
   "ui": {
     "settings": [
       {
@@ -212,7 +251,12 @@
       {
         "section": "Xero",
         "fields": [
-          { "key": "xeroClientId", "label": "Xero Client ID", "type": "text", "defaultValue": "" },
+          {
+            "key": "xeroClientId",
+            "label": "Xero Client ID",
+            "type": "text",
+            "defaultValue": ""
+          },
           {
             "key": "xeroClientSecret",
             "label": "Xero Client Secret",
@@ -241,7 +285,9 @@
     ]
   },
   "aiDisclosure": {
-    "tools": ["Kilo (DeepSeek) — scaffold and implementation"],
+    "tools": [
+      "Kilo (DeepSeek) \u2014 scaffold and implementation"
+    ],
     "humanReview": true
   }
 }

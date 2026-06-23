@@ -8,11 +8,11 @@
  * Plugin #205 from plugin-ideas.md
  */
 
-import type { PluginContext, Tool, ToolResult } from 'cortex/plugins';
+import type { PluginContext, Tool, ToolCallResult } from 'cortex/plugins';
 
 const ALLOWED_PLATFORMS = ['quickbooks', 'xero', 'freshbooks'] as const;
 
-function validate(p: string): ToolResult | null {
+function validate(p: string): ToolCallResult | null {
   if (!ALLOWED_PLATFORMS.includes(p as typeof ALLOWED_PLATFORMS[number])) {
     return {
       toolName: '',
@@ -80,7 +80,7 @@ const pnlTool: Tool = {
     ],
     capabilities: ['network:fetch'],
   },
-  execute: async (args, ctx): Promise<ToolResult> => {
+  execute: async (args, ctx): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const err = validate(args.platform as string);
@@ -131,7 +131,7 @@ const bsTool: Tool = {
     ],
     capabilities: ['network:fetch'],
   },
-  execute: async (args, ctx): Promise<ToolResult> => {
+  execute: async (args, ctx): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const err = validate(args.platform as string);
@@ -185,7 +185,7 @@ const cfTool: Tool = {
     ],
     capabilities: ['network:fetch'],
   },
-  execute: async (args, ctx): Promise<ToolResult> => {
+  execute: async (args, ctx): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const err = validate(args.platform as string);
@@ -230,7 +230,7 @@ const varianceTool: Tool = {
     ],
     capabilities: ['network:fetch'],
   },
-  execute: async (args, ctx): Promise<ToolResult> => {
+  execute: async (args, ctx): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const err = validate(args.platform as string);
@@ -317,7 +317,7 @@ const accountsTool: Tool = {
     ],
     capabilities: ['network:fetch'],
   },
-  execute: async (args, ctx): Promise<ToolResult> => {
+  execute: async (args, ctx): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const err = validate(args.platform as string);
@@ -375,7 +375,7 @@ const analyzeTool: Tool = {
     ],
     capabilities: ['network:fetch'],
   },
-  execute: async (args, ctx): Promise<ToolResult> => {
+  execute: async (args, ctx): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const err = validate(args.platform as string);
